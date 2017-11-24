@@ -14,6 +14,7 @@
 
 #include <sys/time.h>
 #include <iostream>
+#include <map>
 using std::cout;
 using std::endl;
 
@@ -128,6 +129,8 @@ const int MAX = 1000;
 // Create an array for memoization
 int f[MAX] = {0};
 
+static std::map<int, int> results;
+
 // Returns n'th fuibonacci number using table f[]
 int fib(int n)
 {
@@ -138,17 +141,18 @@ int fib(int n)
         return (f[n] = 1);
 
     // If fib(n) is already computed
-    if (f[n])
-        return f[n];
+    // if (f[n])
+    //     return f[n];
+    if(results.count(n) > 0) return results[n];
 
     int k = (n & 1)? (n+1)/2 : n/2;
 
     // Applyting above formula [Note value n&1 is 1
     // if n is odd, else 0.
-    f[n] = (n & 1)? (fib(k)*fib(k) + fib(k-1)*fib(k-1))
+    results[n] = (n & 1)? (fib(k)*fib(k) + fib(k-1)*fib(k-1))
            : (2*fib(k-1) + fib(k))*fib(k);
 
-    return f[n];
+    return results[n];
 }
 int main() {
   int n = 9;
