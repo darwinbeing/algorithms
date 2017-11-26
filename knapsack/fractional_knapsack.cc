@@ -19,16 +19,24 @@ struct Item {
 };
 
 // Comparison function to sort Item according to val/weight ratio
-bool cmp(struct Item a, struct Item b) {
-  double r1 = (double)a.value / a.weight;
-  double r2 = (double)b.value / b.weight;
-  return r1 > r2;
-}
+// bool cmp(struct Item a, struct Item b) {
+//   double r1 = (double)a.value / a.weight;
+//   double r2 = (double)b.value / b.weight;
+//   return r1 > r2;
+// }
+struct myclass {
+  bool operator()(struct Item a, struct Item b) {
+    double r1 = (double)a.value / a.weight;
+    double r2 = (double)b.value / b.weight;
+    return r1 > r2;
+  }
+}myobject;
 
 // Main greedy function to solve problem
 double fractionalKnapsack(int W, struct Item arr[], int n) {
   //    sorting Item on basis of ration
-  sort(arr, arr + n, cmp);
+  // sort(arr, arr + n, cmp);
+  sort(arr, arr + n, myobject);
 
   // Uncomment to see new order of Items with their ratio
   /*
