@@ -21,4 +21,6 @@ link_directories(/usr/local/Cellar/libuv/1.11.0/lib)
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 
-add_executable(main ${sources})
+add_executable(knapsack ${sources})
+
+add_executable(fractional_knapsack fractional_knapsack.cc)
